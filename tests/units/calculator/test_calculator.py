@@ -15,3 +15,7 @@ def test_add_method_with_empty_string(calculator):
 def test_add_method_with_single_number(calculator):
     result=calculator.add("1")
     assert result==1
+
+def test_add_method_with_delimiters_multiple_number(calculator):
+    result=calculator.add("1,2")
+    assert result==1
