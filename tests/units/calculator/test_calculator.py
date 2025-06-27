@@ -58,3 +58,8 @@ def test_add_method_ignore_number_greater_than_max_limit(calculator):
     expected=3
     result=calculator.add("//;\n1;2;1002")
     assert expected == result
+
+def test_add_method_dynamic_lenght_delimiter(calculator):
+    expected=6
+    result=calculator.add("//[***]\n1***2***3")
+    assert expected == result
