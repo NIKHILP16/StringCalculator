@@ -63,3 +63,11 @@ def test_add_method_dynamic_lenght_delimiter(calculator):
     expected=6
     result=calculator.add("//[***]\n1***2***3")
     assert expected == result
+
+@pytest.mark.parametrize("input_str, expected", [
+    ("//[***]\n1***2***3", 6),
+    ("//[*][%]\n1*2%4", 7),
+    ("//[**][%]\n1**2%3\n4", 10)
+])
+def test_add_method_dynamic_lenght_multi_delimiter(calculator,input_str, expected):
+    assert expected==calculator.add(input_str)
