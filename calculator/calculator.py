@@ -1,5 +1,5 @@
 from typing import Optional
-from constants import Errors
+from constants import Errors,Limits
 class Calculator:
     """
     A simple calculator class to perform basic arithmetic operations.
@@ -49,16 +49,23 @@ class Calculator:
             numbers=numbers.replace(deli, ",")
         parts=numbers.split(",")
 
-        #check invalid inputs
-        if '' in parts:
-            raise ValueError(Errors.EMPTY_INPUT)
+        negatives = []
+        total = 0
+        for part in parts:
+            #check invalid inputs
+            if part=='':
+                raise ValueError(Errors.EMPTY_INPUT)
+            #convert number from sting to int
+            num = int(part)
 
-        #convert number from sting to int
-        nums=[int(part) for part in parts]
+            #check negative number
+            if num < 0:
+                negatives.append(num)
 
-        # check negative integers 
-        negatives=[num for num in nums if num<0]
+            elif num <= Limits.MAX_NUMBER:
+                total += num
+
         if negatives:
             raise ValueError(Errors.NEGATIVE_NUMBERS.format(negatives))
-        total = sum(nums)
-        return int(total)
+        
+        return total
