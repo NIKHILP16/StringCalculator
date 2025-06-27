@@ -26,6 +26,13 @@ class Calculator:
         -------
         int
             The sum of the provided numbers.
+
+        Raises
+        ------
+        ValueError
+            If the input contains:
+            - Empty number values (e.g., "1,\n")
+            - Negative numbers (e.g., "1,-2,3"), with all negatives listed in the error message
         """
         delemiter=["\n"]
         if not numbers:
@@ -41,9 +48,17 @@ class Calculator:
         for deli in delemiter:
             numbers=numbers.replace(deli, ",")
         parts=numbers.split(",")
+
+        #check invalid inputs
         if '' in parts:
             raise ValueError(Errors.EMPTY_INPUT)
 
+        #convert number from sting to int
+        nums=[int(part) for part in parts]
 
-        total = sum(int(part) for part in parts)
+        # check negative integers 
+        negatives=[num for num in nums if num<0]
+        if negatives:
+            raise ValueError(Errors.NEGATIVE_NUMBERS.format(negatives))
+        total = sum(nums)
         return int(total)
