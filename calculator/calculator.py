@@ -26,5 +26,6 @@ class Calculator:
         """
         if not numbers:
             return 0
+        result=sum(map(int,numbers.split(",")))
         
-        return int(numbers)
+        return int(result)
