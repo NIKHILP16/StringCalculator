@@ -1,5 +1,6 @@
 from typing import Optional
 from constants import Errors,Limits
+import re
 class Calculator:
     """
     A simple calculator class to perform basic arithmetic operations.
@@ -25,7 +26,7 @@ class Calculator:
         Returns
         -------
         int
-            The sum of the provided numbers.
+            The sum of the provided numbers. If number greater than MAX_NUMBER it is ignored
 
         Raises
         ------
@@ -34,7 +35,7 @@ class Calculator:
             - Empty number values (e.g., "1,\n")
             - Negative numbers (e.g., "1,-2,3"), with all negatives listed in the error message
         """
-        delemiter=["\n"]
+        delimiters=["\n"]
         if not numbers:
             return 0
         
@@ -42,10 +43,14 @@ class Calculator:
         if numbers.startswith("//"):
             raw_delimiter, numbers = numbers.split("\n", 1)
             if raw_delimiter :
-                delemiter.append(raw_delimiter[-1])
+                match = re.findall(r"//\[(.*?)\]",raw_delimiter)
+                if match:
+                    delimiters.extend(match)
+                else:
+                    delimiters.append(raw_delimiter[-1])
 
         #check for \n replace with , to spling along with , in one go
-        for deli in delemiter:
+        for deli in delimiters:
             numbers=numbers.replace(deli, ",")
         parts=numbers.split(",")
 
