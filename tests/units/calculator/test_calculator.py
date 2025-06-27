@@ -9,30 +9,38 @@ def test_initialize_calculator(calculator):
     assert isinstance(calculator, Calculator)
 
 def test_add_method_with_empty_string(calculator):
+    expected=0
     result=calculator.add("")
-    assert result==0
+    assert expected==result
 
 def test_add_method_with_single_number(calculator):
+    expected=1
     result=calculator.add("1")
-    assert result==1
+    assert expected==result
 
 def test_add_method_with_delimiters_multiple_number(calculator):
+    expected=3
     result=calculator.add("1,2")
-    assert result==3
+    assert expected==result
 
 def test_add_method_with_delimiters_multiple_number_2(calculator):
+    expected=15
     result=calculator.add("1,2,3,4,5")
-    assert result==15
+    assert expected==result
 
 def test_add_method_with_newline_delimiters(calculator):
+    expected=6
     result=calculator.add("1\n2,3")
-    assert result==6
+    assert expected==result
 
 def test_add_with_invalid_input(calculator):
+    expected=Errors.EMPTY_INPUT
     with pytest.raises(ValueError) as exc_info:
         calculator.add("1,\n")
-    assert Errors.EMPTY_INPUT in str(exc_info.value)
+    
+    assert  expected== str(exc_info.value)
 
 def test_add_method_with_custom_delimeter(calculator):
+    expected=3
     result=calculator.add("//;\n1;2")
-    assert result==3
+    assert expected==result
