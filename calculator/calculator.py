@@ -22,6 +22,7 @@ class Calculator:
             - A string containing zero or more integers separated by commas (e.g., "1,2,3").
             - A string by delimiters ("\n",",") (e.g., "1\n2,3").
             - A string by custom delimiters between // and \n (e.g., "//;\n1\n2,3").
+            - A string by custom multiple delimiters between // and \n  with dynamic lenght (e.g.,  ("//[***]\n1***2***3","//[*][%]\n1*2%4","//[**][%]\n1**2%3\n4").
 
         Returns
         -------
@@ -43,7 +44,7 @@ class Calculator:
         if numbers.startswith("//"):
             raw_delimiter, numbers = numbers.split("\n", 1)
             if raw_delimiter :
-                match = re.findall(r"//\[(.*?)\]",raw_delimiter)
+                match = re.findall(r"\[(.*?)\]",raw_delimiter)
                 if match:
                     delimiters.extend(match)
                 else:
