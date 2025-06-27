@@ -40,7 +40,16 @@ def test_add_with_invalid_input(calculator):
     
     assert  expected== str(exc_info.value)
 
-def test_add_method_with_custom_delimeter(calculator):
-    expected=3
-    result=calculator.add("//;\n1;2")
-    assert expected==result
+@pytest.mark.parametrize("input_str, expected", [
+    ("//;\n1;2", 3),
+    ("//|\n4|0|6", 10),
+    ("//:\n7:8\n9", 24)
+])
+def test_add_method_with_custom_delimeter(calculator,input_str, expected):
+    assert expected==calculator.add(input_str)
+
+def test_add_method_with_negative_numbers(calculator):
+    expected=Errors.NEGATIVE_NUMBERS.format([-2])
+    with pytest.raises(ValueError) as exc_info:
+        calculator.add("//;\n1;-2")
+    assert expected == str(exc_info.value)
