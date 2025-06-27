@@ -53,3 +53,8 @@ def test_add_method_with_negative_numbers(calculator):
     with pytest.raises(ValueError) as exc_info:
         calculator.add("//;\n1;-2")
     assert expected == str(exc_info.value)
+
+def test_add_method_ignore_number_greater_than_max_limit(calculator):
+    expected=3
+    result=calculator.add("//;\n1;2;1002")
+    assert expected == result
