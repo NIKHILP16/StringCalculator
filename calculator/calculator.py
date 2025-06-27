@@ -24,8 +24,17 @@ class Calculator:
         int
             The sum of the provided numbers.
         """
+        
         if not numbers:
             return 0
-        result=sum(map(int,numbers.split(",")))
-        
-        return int(result)
+        delemiter=["\n"]
+        #check for \n replace with , to spling along with , in one go
+        for deli in delemiter:
+            numbers=numbers.replace(deli, ",")
+        parts=numbers.split(",")
+        if '' in parts:
+            raise ValueError("Invalid input")
+
+
+        total = sum(int(part) for part in parts)
+        return int(total)
