@@ -32,3 +32,7 @@ def test_add_with_invalid_input(calculator):
     with pytest.raises(ValueError) as exc_info:
         calculator.add("1,\n")
     assert Errors.EMPTY_INPUT in str(exc_info.value)
+
+def test_add_method_with_custom_delimeter(calculator):
+    result=calculator.add("//;\n1;2")
+    assert result==3
