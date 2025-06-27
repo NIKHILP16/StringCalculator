@@ -1,4 +1,5 @@
 from typing import Optional
+from constants import Errors
 class Calculator:
     """
     A simple calculator class to perform basic arithmetic operations.
@@ -33,7 +34,7 @@ class Calculator:
             numbers=numbers.replace(deli, ",")
         parts=numbers.split(",")
         if '' in parts:
-            raise ValueError("Invalid input")
+            raise ValueError(Errors.EMPTY_INPUT)
 
 
         total = sum(int(part) for part in parts)
