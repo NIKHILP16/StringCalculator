@@ -18,7 +18,7 @@ A String Calculator implemented using the Test-Driven Development (TDD) approach
     git clone git@github.com:NIKHILP16/StringCalculator.git
     cd StringCalculator
 
-### 2. Clone the repository
+### 2. Setup Environment 
 
     Create and activate virtual environment
 
@@ -30,7 +30,7 @@ A String Calculator implemented using the Test-Driven Development (TDD) approach
         python -m venv venv
         venv\Scripts\activate
 
-### 3. Clone the repository
+### 3. Install Requirements
 
     pip install -r requirements.txt
 
